@@ -50,6 +50,20 @@ public class Tabuleiro {
 		peca.posicaoMatriz = posicao;
 	}
 	
+	public Peca removerPeca(Posicao posicao) {
+		if(!isPosicaoExistente(posicao)) {
+			throw new TabuleiroException("Posição inexistente no tabuleiro!");
+		}
+		if(obterPeca(posicao) == null) {
+			return null;
+		}
+		Peca aux = obterPeca(posicao);
+		aux.posicaoMatriz = null;
+		pecas[posicao.getLinha()][posicao.getColuna()] = null;
+		
+		return aux;
+	}
+	
 	public Boolean isPosicaoExistente(Integer linha, Integer coluna) {
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
 	}
