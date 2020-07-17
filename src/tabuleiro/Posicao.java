@@ -31,5 +31,10 @@ public class Posicao {
 		return linha + ", " + coluna;
 	}
 	
+	public void atualizarPosicao(Integer linha, Integer coluna) {
+		this.linha = linha;
+		this.coluna = coluna;
+	}
+	
 
 }
