@@ -1,6 +1,5 @@
 package aplicacao;
 
-import java.security.PrivilegedExceptionAction;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -23,6 +22,10 @@ public class Programa {
 				System.out.println();
 				System.out.print("Origem: ");
 				PosicaoXadrez origem = UI.lerPosicaoXadrez(sc);
+				
+				Boolean[][] movimentosPossiveis = partida.mostrarMovimentosPossiveis(origem);
+				UI.limparTela();
+				UI.imprimirTabuleiro(partida.getPecas(), movimentosPossiveis);
 				
 				System.out.println();
 				System.out.print("Destino: ");

@@ -46,10 +46,17 @@ public class PartidaXadrez {
 		
 		return pecaCapturada;
 	}
+	
+	public Boolean[][] mostrarMovimentosPossiveis(PosicaoXadrez origem){
+		Posicao posicao = origem.toPosicao();
+		validarPosicaoInicial(posicao);
+		
+		return tabuleiro.obterPeca(posicao).movimentosPossiveis();
+	}
 
 	private void validarPosicaoInicial(Posicao origem) {
 
-		if(!tabuleiro.isPosicaoExistente(origem)) {
+		if(!tabuleiro.temUmaPecaNaPosicao(origem)) {
 			throw new XadrezException("Não há peça na posição de origem!");
 		}
 		
