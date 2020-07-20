@@ -17,8 +17,8 @@ public class Rei extends PecaXadrez {
 	}
 
 	@Override
-	public Boolean[][] movimentosPossiveis() {
-		Boolean[][] matriz = new Boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+	public boolean[][] movimentosPossiveis() {
+		boolean[][] matriz = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
 		
 		Posicao p = new Posicao(0, 0);
 		
@@ -75,7 +75,7 @@ public class Rei extends PecaXadrez {
 		return matriz;
 	}
 	
-	private Boolean podeMover(Posicao posicao) {
+	private boolean podeMover(Posicao posicao) {
 		PecaXadrez peca = (PecaXadrez)getTabuleiro().obterPeca(posicao);
 		
 		return peca == null || peca.getCor() != getCor();

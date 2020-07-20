@@ -22,11 +22,6 @@ public class Tabuleiro {
 	public Integer getColunas() {
 		return colunas;
 	}
-
-	public void setColunas(Integer colunas) {
-		this.colunas = colunas;
-	}
-	
 	
 	public Peca obterPeca(Integer linha, Integer coluna) {
 		if(!isPosicaoExistente(linha, coluna)) {

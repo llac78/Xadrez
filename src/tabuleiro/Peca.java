@@ -13,14 +13,14 @@ public abstract class Peca {
 		return tabuleiro;
 	}
 	
-	public abstract Boolean[][] movimentosPossiveis();
+	public abstract boolean[][] movimentosPossiveis();
 	
 	public Boolean movimentoPossivel(Posicao posicao) {
 		return movimentosPossiveis()[posicao.getLinha()][posicao.getColuna()];
 	}
 	
 	public Boolean existeMovimentosPossiveis() {
-		Boolean[][] matriz = movimentosPossiveis();
+		boolean[][] matriz = movimentosPossiveis();
 		
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz.length; j++) {
