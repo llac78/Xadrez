@@ -77,7 +77,7 @@ public class PartidaXadrez {
 		colocarNovaPeca('a', 4, new Rei(tabuleiro, Cor.PRETA));
 		colocarNovaPeca('h', 8, new Torre(tabuleiro, Cor.BRANCA));
 		colocarNovaPeca('g', 7, new Rei(tabuleiro, Cor.BRANCA));
-		}
+	}
 	
 	private void colocarNovaPeca(char coluna, Integer linha, PecaXadrez pecaXadrez) {
 		tabuleiro.colocarPeca(pecaXadrez, new PosicaoXadrez(coluna, linha).toPosicao());

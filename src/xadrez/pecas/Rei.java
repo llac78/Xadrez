@@ -1,5 +1,6 @@
 package xadrez.pecas;
 
+import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 import xadrez.Cor;
 import xadrez.PecaXadrez;
@@ -18,7 +19,66 @@ public class Rei extends PecaXadrez {
 	@Override
 	public Boolean[][] movimentosPossiveis() {
 		Boolean[][] matriz = new Boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+		
+		Posicao p = new Posicao(0, 0);
+		
+		//acima
+		p.atualizarPosicao(posicaoMatriz.getLinha() - 1, posicaoMatriz.getColuna());
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//abaixo
+		p.atualizarPosicao(posicaoMatriz.getLinha() + 1, posicaoMatriz.getColuna());
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//esquerda
+		p.atualizarPosicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() - 1);
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//direita
+		p.atualizarPosicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() + 1);
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//noroeste
+		p.atualizarPosicao(posicaoMatriz.getLinha() - 1, posicaoMatriz.getColuna() - 1);
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//nordeste
+		p.atualizarPosicao(posicaoMatriz.getLinha() - 1, posicaoMatriz.getColuna() + 1);
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//sudoeste
+		p.atualizarPosicao(posicaoMatriz.getLinha() + 1, posicaoMatriz.getColuna() - 1);
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+		
+		//sudeste
+		p.atualizarPosicao(posicaoMatriz.getLinha() + 1, posicaoMatriz.getColuna() + 1);
+		if(getTabuleiro().isPosicaoExistente(p) && podeMover(p)) {
+			matriz[p.getLinha()][p.getColuna()] = true;
+		}
+	
+		
+		
 		return matriz;
+	}
+	
+	private Boolean podeMover(Posicao posicao) {
+		PecaXadrez peca = (PecaXadrez)getTabuleiro().obterPeca(posicao);
+		
+		return peca == null || peca.getCor() != getCor();
 	}
 
 }
