@@ -1,7 +1,5 @@
 package xadrez;
 
-import java.awt.Color;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +20,7 @@ public class PartidaXadrez {
 	private List<Peca> pecasCapturadas = new ArrayList<>();
 	
 	private boolean check;
+	private boolean checkMate;
 
 	public PartidaXadrez() {
 		tabuleiro = new Tabuleiro(8, 8);
@@ -44,6 +43,10 @@ public class PartidaXadrez {
 	
 	public boolean getCheck() {
 		return check;
+	}
+	
+	public boolean getCheckMate() {
+		return checkMate;
 	}
 
 	public PecaXadrez[][] getPecas(){
@@ -72,7 +75,11 @@ public class PartidaXadrez {
 		
 		check = (testarCheck(oponente(jogadorAtual))) ? true : false;
 		
-		trocarVez();
+		if (testarCheckMate(oponente(jogadorAtual))) {
+			checkMate = true;
+		} else {
+			trocarVez();
+		}
 		
 		return (PecaXadrez) pecaCapturada;
 	}
@@ -175,6 +182,31 @@ public class PartidaXadrez {
 			}
 		}
 		return false;
+	}
+	
+	private boolean testarCheckMate(Cor cor) {
+		if (!testarCheck(cor)) {
+			return false;
+		}
+		List<Peca> lista = pecasTabuleiro.stream().filter(x -> ((PecaXadrez)x).getCor() == cor).collect(Collectors.toList());
+		for (Peca peca : lista) {
+			boolean[][] matriz = peca.movimentosPossiveis();
+			for (int i = 0; i < tabuleiro.getLinhas(); i++) {
+				for (int j = 0; j < tabuleiro.getColunas(); j++) {
+					if (matriz[i][j]) {
+						Posicao origem = ((PecaXadrez)peca).getPosicaoXadrez().toPosicao();
+						Posicao destino = new Posicao(i, j);
+						Peca pecaCapturada = movimentar(origem, destino);
+						boolean testeCheck = testarCheck(cor);
+						desfazerMovimento(origem, destino, pecaCapturada);
+						if (!testeCheck) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 	
 }

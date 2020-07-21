@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Collector.Characteristics;
 
 import xadrez.Cor;
 import xadrez.PartidaXadrez;
@@ -75,7 +76,7 @@ public class UI {
 		System.out.println("  a b c d e f g h");
 	}
 
-	private static void imprimirPeca(PecaXadrez peca, Boolean background) {
+	private static void imprimirPeca(PecaXadrez peca, boolean background) {
 
 		if(background) {
 			System.out.println(ANSI_BLUE_BACKGROUND);
@@ -100,11 +101,18 @@ public class UI {
 		imprimirPecasCapturadas(capturadas);
 		System.out.println();
 		System.out.println("Vez: " + partida.getVez());
-		System.out.println("Esperando jogador: " + partida.getJogadorAtual());
 		
-		if(partida.getCheck()) {
-			System.out.println("CHECK!");
+		if(!partida.getCheckMate()) {
+			System.out.println("Esperando jogador: " + partida.getJogadorAtual());
+			if(partida.getCheck()) {
+				System.out.println("CHECK");
+			}
+		} else {
+			System.out.println("CHECKMATE");
+			System.out.println("Vencedor: " + partida.getJogadorAtual());
 		}
+		
+		
 	}
 	
 	public static void imprimirPecasCapturadas(List<PecaXadrez> capturadas) {
