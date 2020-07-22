@@ -70,8 +70,6 @@ public class Rei extends PecaXadrez {
 			matriz[p.getLinha()][p.getColuna()] = true;
 		}
 	
-		
-		
 		return matriz;
 	}
 	

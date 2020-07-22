@@ -5,7 +5,6 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Collector.Characteristics;
 
 import xadrez.Cor;
 import xadrez.PartidaXadrez;
@@ -79,7 +78,7 @@ public class UI {
 	private static void imprimirPeca(PecaXadrez peca, boolean background) {
 
 		if(background) {
-			System.out.println(ANSI_BLUE_BACKGROUND);
+			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
 		
     	if (peca == null) {

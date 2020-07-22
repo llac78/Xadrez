@@ -59,15 +59,15 @@ public class Tabuleiro {
 		return aux;
 	}
 	
-	public Boolean isPosicaoExistente(Integer linha, Integer coluna) {
+	public boolean isPosicaoExistente(Integer linha, Integer coluna) {
 		return linha >= 0 && linha < linhas && coluna >= 0 && coluna < colunas;
 	}
 	
-	public Boolean isPosicaoExistente(Posicao posicao) {
+	public boolean isPosicaoExistente(Posicao posicao) {
 		return isPosicaoExistente(posicao.getLinha(), posicao.getColuna());
 	}
 
-	public Boolean temUmaPecaNaPosicao(Posicao posicao) {
+	public boolean temUmaPecaNaPosicao(Posicao posicao) {
 		if(!isPosicaoExistente(posicao)) {
 			throw new TabuleiroException("Posição inexistente no tabuleiro!");
 		}
