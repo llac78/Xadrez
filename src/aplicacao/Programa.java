@@ -40,6 +40,12 @@ public class Programa {
 					capturadas.add(pecaCapturada);
 				}
 				
+				if(partida.getPecaPromovida() != null) {
+					System.out.println("Informe uma peça para promoção (B/C/D/T): ");
+					String tipo = sc.nextLine();
+					partida.trocarPecaPromovida(tipo);
+				}
+				
 			} catch (XadrezException e) {
 				System.out.println(e.getMessage());
 				sc.nextLine();
