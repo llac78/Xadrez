@@ -42,7 +42,11 @@ public class Programa {
 				
 				if(partida.getPecaPromovida() != null) {
 					System.out.println("Informe uma peça para promoção (B/C/D/T): ");
-					String tipo = sc.nextLine();
+					String tipo = sc.nextLine().toUpperCase();
+					while(!tipo.equals("B") && !tipo.equals("C") && !tipo.equals("D") && !tipo.equals("T")) {
+						System.out.println("Informe uma peça para promoção (B/C/D/T): ");
+						tipo = sc.nextLine().toUpperCase();
+					}
 					partida.trocarPecaPromovida(tipo);
 				}
 				
