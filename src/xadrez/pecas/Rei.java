@@ -3,12 +3,16 @@ package xadrez.pecas;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 import xadrez.Cor;
+import xadrez.PartidaXadrez;
 import xadrez.PecaXadrez;
 
 public class Rei extends PecaXadrez {
+	
+	private PartidaXadrez partida;
 
-	public Rei(Tabuleiro tabuleiro, Cor cor) {
+	public Rei(Tabuleiro tabuleiro, Cor cor, PartidaXadrez partida) {
 		super(tabuleiro, cor);
+		this.partida = partida;
 	}
 	
 	@Override
@@ -70,6 +74,30 @@ public class Rei extends PecaXadrez {
 			matriz[p.getLinha()][p.getColuna()] = true;
 		}
 	
+		//Roque
+		if (getContadorMovimentos() == 0 && !partida.getCheck()) {
+			// pequeno
+			Posicao posTorre1 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() + 3);
+			if (testarTorreRoque(posTorre1)) {
+				Posicao p1 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() + 1);
+				Posicao p2 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() + 2);
+				if (getTabuleiro().obterPeca(p1) == null && getTabuleiro().obterPeca(p2) == null) {
+					matriz[posicaoMatriz.getLinha()][posicaoMatriz.getColuna() + 2] = true;
+				}
+			}
+			// grande
+			Posicao posTorre2 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() - 4);
+			if (testarTorreRoque(posTorre2)) {
+				Posicao p1 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() - 1);
+				Posicao p2 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() - 2);
+				Posicao p3 = new Posicao(posicaoMatriz.getLinha(), posicaoMatriz.getColuna() - 3);
+				if (getTabuleiro().obterPeca(p1) == null && getTabuleiro().obterPeca(p2) == null && getTabuleiro().obterPeca(p3) == null) {
+					matriz[posicaoMatriz.getLinha()][posicaoMatriz.getColuna() - 2] = true;
+				}
+			}
+		}
+		
+		
 		return matriz;
 	}
 	
@@ -78,5 +106,12 @@ public class Rei extends PecaXadrez {
 		
 		return peca == null || peca.getCor() != getCor();
 	}
+	
+	private boolean testarTorreRoque(Posicao posicao) {
+		PecaXadrez p = (PecaXadrez)getTabuleiro().obterPeca(posicao);
+		return p != null && p instanceof Torre && p.getCor() == getCor() && p.getContadorMovimentos() == 0;
+	}
+
+	
 
 }
